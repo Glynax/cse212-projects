@@ -1,8 +1,10 @@
-public static class ArraysTester {
+public static class ArraysTester
+{
     /// <summary>
     /// Entry point for the tests
     /// </summary>
-    public static void Run() {
+    public static void Run()
+    {
         // Sample Test Cases (may not be comprehensive)
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         double[] multiples = MultiplesOf(7, 5);
@@ -34,14 +36,21 @@ public static class ArraysTester {
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     private static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Create a list to store the multiples
+        List<double> result = new List<double>();
 
-        return new double[0]; // replace this return statement with your own
+        // Generate the specified number of multiples
+        for (int i = 1; i <= length; i++)
+        {
+            // Calculate and add the next multiple to the list
+            result.Add(number * i);
+        }
+
+        // Convert the list to an array and return it
+        return result.ToArray();
     }
-    
+
+
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
     /// <c>&lt;List&gt;{1, 2, 3, 4, 5, 6, 7, 8, 9}</c> and an amount is 3 then the list returned should be 
@@ -52,10 +61,27 @@ public static class ArraysTester {
     /// </summary>
     private static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Calculate the effective rotation amount within the list's bounds
+        int effectiveAmount = amount % data.Count;
 
+        // Check if no rotation is needed
+        if (effectiveAmount == 0)
+        {
+            return;
+        }
+
+        // Create sublists for the elements to move right and left
+        List<int> rightPart = data.GetRange(0, data.Count - effectiveAmount);
+        List<int> leftPart = data.GetRange(data.Count - effectiveAmount, effectiveAmount);
+
+        // Clear the original list
+        data.Clear();
+
+        // Add the elements from the left sublist (rotated part) first
+        data.AddRange(leftPart);
+
+        // Add the elements from the right sublist (unchanged part)
+        data.AddRange(rightPart);
     }
+
 }
